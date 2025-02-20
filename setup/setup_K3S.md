@@ -1,6 +1,6 @@
 # Configuração do Cluster K3S
 
-Este documento descreve o processo feito pelo grupo para instalar e configurar o **K3S** para a criação de um cluster Kubernetes leve e eficiente no Ubuntu.
+Este documento descreve o processo feito pelo grupo para instalar e configurar o **K3S** para a criação de um cluster Kubernetes leve e eficiente.
 
 ---
 
