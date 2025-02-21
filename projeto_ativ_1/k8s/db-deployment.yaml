@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-db-pspd
+  namespace: trab-pspd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-db-pspd
+  template:
+    metadata:
+      labels:
+        app: postgres-db-pspd
+    spec:
+      containers:
+        - name: postgres-db-pspd
+          image: postgres:13
+          env:
+            - name: POSTGRES_USER
+              value: "lameque"  # Coloque o nome de usuário aqui
+            - name: POSTGRES_PASSWORD
+              value: "lameque"  # Coloque a senha do banco aqui
+            - name: POSTGRES_DB
+              value: "trabpsps"  # Nome do banco de dados
+          ports:
+            - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-db-pspd-service
+  namespace: trab-pspd
+spec:
+  selector:
+    app: postgres-db-pspd
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

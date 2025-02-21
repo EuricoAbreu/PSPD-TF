@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-pspd
+  namespace: trab-pspd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-pspd
+  template:
+    metadata:
+      labels:
+        app: fastapi-pspd
+    spec:
+      containers:
+        - name: fastapi-pspd
+          image: lamequesao/fastapi-trab-pspd  # Substitua com a imagem correta do seu backend
+          ports:
+            - containerPort: 8000
+          env:
+            - name: user
+              value: "lameque"  # Coloque seu usuário aqui
+            - name: password
+              value: "lameque"  # Coloque sua senha aqui
+            - name: host
+              value: "postgres-db-pspd-service"  # O nome do serviço do banco
+            - name: port
+              value: "5432"  # Porta do banco
+            - name: dbname
+              value: "trabpsps"  # Nome do banco de dados
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-pspd-service
+  namespace: trab-pspd
+spec:
+  selector:
+    app: fastapi-pspd
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
