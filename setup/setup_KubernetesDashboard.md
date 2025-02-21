@@ -26,7 +26,15 @@ Com o proxy em execução, acessamos a interface web através do seguinte link:
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
 
-## 4. Gerando o Token de Acesso
+## 4. Criando o Admin User
+
+Antes de gerar o token de acesso, criamos a conta de serviço do usuário administrador:
+
+```sh
+kubectl create serviceaccount admin-user -n kubernetes-dashboard
+```
+
+## 5. Gerando o Token de Acesso
 
 Para acessar o painel administrativo, geramos um token de autenticação:
 
